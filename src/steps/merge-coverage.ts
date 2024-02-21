@@ -4,7 +4,7 @@ import { execSync } from "child_process";
 import { info } from "console";
 import { readFileSync } from "fs";
 import { CoverageMetric, CoverageSummary } from "../types";
-import { getCoverageArtifactName, getNthIndexOfCharacter, getSummaryTable, logException } from "../utils";
+import { getCoverageArtifactName, getNthIndexOfCharacter, getString, getSummaryTable, logException } from "../utils";
 import { debug } from "@actions/core";
 import { getOctokitForToken } from "../utils/octokit";
 
@@ -32,9 +32,17 @@ export const mergeCoverage = async ({
       }
     }
 
-    // TODO: check if file exists
     const output = execSync(
-      "npx --yes nyc report --reporter=json-summary --reporter=text -t coverage --check-coverage --report-dir coverage-merged"
+      getString(
+        "npx",
+        "--yes",
+        "nyc report",
+        "--reporter=json-summary",
+        " --reporter=text",
+        "-t coverage",
+        "--check-coverage",
+        " --report-dir coverage-merged"
+      )
     );
 
     const textSummary = output.toString();
