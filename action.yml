@@ -6,10 +6,14 @@ inputs:
     description: "Github Token for the workflow"
     default: "GITHUB_TOKEN"
     required: true
-  command:
+  task:
     description: "Command to run (one of 'run-tests' | 'merge-coverage'"
     required: false
     default: "run-tests"
+  command:
+    description: "NPM command to run"
+    required: false
+    default: "test"
   coverage:
     description: "Enable Coverage for`run-tests` command"
     required: false

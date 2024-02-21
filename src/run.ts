@@ -4,11 +4,11 @@ import { mergeCoverage } from "./steps/merge-coverage";
 import { runTests } from "./steps/run-tests";
 
 export const run = async () => {
-  const command = getInput("command");
+  const task = getInput("task");
 
-  info(`Running command: ${command}...`);
+  info(`Running task: ${task}...`);
 
-  switch (command) {
+  switch (task) {
     case "run-tests":
       await runTests({
         coverage: getBooleanInput("coverage"),
@@ -25,11 +25,11 @@ export const run = async () => {
       });
       break;
     default: {
-      const _error = `Invalid command: ${command}`;
+      const _error = `Invalid task: ${task}`;
       error(_error);
       setFailed(_error);
     }
   }
 
-  info(`Running command: ${command}... DONE`);
+  info(`Running task: ${task}... DONE`);
 };
