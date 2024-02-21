@@ -8,15 +8,18 @@ interface RunTests {
   coverage: boolean;
   skipArtifactUpload: boolean;
   shard: string;
+  command: string;
 }
 
-export const runTests = async ({ coverage, shard, skipArtifactUpload }: RunTests) => {
+export const runTests = async ({ coverage, shard, skipArtifactUpload, command }: RunTests) => {
   info(getString("Running tests", coverage ? "with coverage" : null, shard && `for shard ${shard}`));
 
   try {
     const output = execSync(
       getString(
-        "npm run test --",
+        "npm run",
+        command,
+        "--",
         coverage ? "--coverage" : null,
         shard && `--shard ${shard}`,
         "--coverageThreshold '{}'"

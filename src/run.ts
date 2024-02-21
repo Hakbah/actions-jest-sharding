@@ -14,6 +14,7 @@ export const run = async () => {
         coverage: getBooleanInput("coverage"),
         shard: getInput("shard"),
         skipArtifactUpload: getBooleanInput("skip-artifact-upload"),
+        command: getInput("command"),
       });
       break;
     case "merge-coverage":
