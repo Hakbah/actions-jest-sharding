@@ -34,7 +34,7 @@ export const mergeCoverage = async ({
 
     // TODO: check if file exists
     const output = execSync(
-      "npx --yes nyc report --reporter=json-summary --reporter=text -t coverage --report-dir coverage-merged"
+      "npx --yes nyc report --reporter=json-summary --reporter=text -t coverage --check-coverage --report-dir coverage-merged"
     );
 
     const textSummary = output.toString();
