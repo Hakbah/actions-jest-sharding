@@ -34,7 +34,7 @@ describe("run", () => {
       expect(spyOnGetBooleanInput).toHaveBeenNthCalledWith(1, "coverage");
       expect(spyOnGetBooleanInput).toHaveBeenNthCalledWith(2, "skip-artifact-upload");
       expect(spyOnRunTests).toHaveBeenCalledWith({
-        command: "",
+        command: "test",
         coverage: true,
         shard: "1/2",
         skipArtifactUpload: false,
