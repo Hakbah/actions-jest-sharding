@@ -48,7 +48,7 @@ jobs:
         name: "Run tests ${{ matrix.shard }}"
         with:
           github-token: "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
-          command: "run-tests"
+          task: "run-tests"
           shard: ${{ matrix.shard }}
           coverage: true
 
@@ -91,6 +91,6 @@ jobs:
         name: "Merge Coverage"
         with:
           github-token: "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
-          command: "merge-coverage"
+          task: "merge-coverage"
           shard-count: "2"
           show-all-files-in-summary: true
