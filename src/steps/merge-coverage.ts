@@ -26,22 +26,11 @@ export const mergeCoverage = async ({
   try {
     if (!skipArtifactUpload) {
       for (let i = 1; i <= shardCount; i++) {
-        const artifactFileId = await artifactClient.listArtifacts({
-          findBy: {
-            token,
-            workflowRunId: context.runId,
-            repositoryOwner: context.repo.owner,
-            repositoryName: context.repo.repo,
-          },
-        });
+        const artifactFileId = await artifactClient.getArtifact(getCoverageArtifactName(i));
 
         debug(`artifactFileId: ${JSON.stringify(artifactFileId)}`);
 
-        if (!artifactFileId.artifacts.length) {
-          throw new Error("No artifacts found");
-        }
-
-        const downloadOutput = await artifactClient.downloadArtifact(artifactFileId.artifacts[0].id);
+        const downloadOutput = await artifactClient.downloadArtifact(artifactFileId.artifact.id);
         debug(`downloadOutput: ${JSON.stringify(downloadOutput)}`);
       }
     }
