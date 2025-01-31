@@ -17,7 +17,7 @@ describe("run-tests", () => {
     });
 
     it("should output merged coverage", async () => {
-      await runTests({ coverage: true, shard: "1/2", skipArtifactUpload: false });
+      await runTests({ coverage: true, shard: "1/2", skipArtifactUpload: false, command: "" });
     });
   });
 });

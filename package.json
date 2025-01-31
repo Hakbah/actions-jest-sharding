@@ -8,7 +8,7 @@
     "test": "jest --runInBand"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm run build && git add -A ."
+    "pre-commit": "npm run build && git add -A ."
   },
   "dependencies": {
     "@actions/artifact": "^2.2.1",

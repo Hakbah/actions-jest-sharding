@@ -1,5 +1,5 @@
 import { getOctokit, context } from "@actions/github";
-import { create as createClient } from "@actions/artifact";
+import artifactClient from "@actions/artifact";
 import { execSync } from "child_process";
 import { info } from "console";
 import { readFileSync } from "fs";
@@ -25,9 +25,23 @@ export const mergeCoverage = async ({
 
   try {
     if (!skipArtifactUpload) {
-      const artifactClient = createClient();
       for (let i = 1; i <= shardCount; i++) {
-        const downloadOutput = await artifactClient.downloadArtifact(getCoverageArtifactName(i));
+        const artifactFileId = await artifactClient.listArtifacts({
+          findBy: {
+            token,
+            workflowRunId: context.runId,
+            repositoryOwner: context.repo.owner,
+            repositoryName: context.repo.repo,
+          },
+        });
+
+        debug(`artifactFileId: ${JSON.stringify(artifactFileId)}`);
+
+        if (!artifactFileId.artifacts.length) {
+          throw new Error("No artifacts found");
+        }
+
+        const downloadOutput = await artifactClient.downloadArtifact(artifactFileId.artifacts[0].id);
         debug(`downloadOutput: ${JSON.stringify(downloadOutput)}`);
       }
     }

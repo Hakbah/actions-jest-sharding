@@ -1,6 +1,6 @@
 import { info, setOutput } from "@actions/core";
 import { execSync } from "child_process";
-import { create as createClient } from "@actions/artifact";
+import artifactClient from "@actions/artifact";
 import { getCoverageArtifactName, getCoverageFileName, getString, logException, moveFile } from "../utils";
 import { debug } from "@actions/core";
 
@@ -40,7 +40,6 @@ export const runTests = async ({ coverage, shard, skipArtifactUpload, command }:
       return;
     }
     info("Uploading artifacts...");
-    const artifactClient = createClient();
     const outputUploadArtifact = await artifactClient.uploadArtifact(
       getCoverageArtifactName(shardIndex),
       [coverageFileName],
@@ -51,6 +50,8 @@ export const runTests = async ({ coverage, shard, skipArtifactUpload, command }:
     );
 
     debug(`outputUploadArtifact: ${JSON.stringify(outputUploadArtifact)}`);
+
+    setOutput("coverage-artifact-id", outputUploadArtifact.id);
 
     info("Uploading artifacts... DONE");
 
