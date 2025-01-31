@@ -11,10 +11,10 @@
     "pre-commit": "pnpm run build && git add -A ."
   },
   "dependencies": {
-    "@actions/artifact": "^1.1.0",
-    "@actions/core": "^1.8.2",
-    "@actions/github": "^5.0.3",
-    "@actions/io": "^1.1.2",
+    "@actions/artifact": "^2.2.1",
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "@actions/io": "^1.1.3",
     "@types/lodash": "^4.14.182",
     "jest": "^28.1.1",
     "lodash": "^4.17.21"
