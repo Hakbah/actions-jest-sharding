@@ -28,12 +28,13 @@ describe("run", () => {
     it("should route commands", () => {
       run();
 
-      expect(spyOnGetInput).toHaveBeenNthCalledWith(1, "command");
+      expect(spyOnGetInput).toHaveBeenNthCalledWith(1, "task");
       expect(spyOnGetInput).toHaveBeenNthCalledWith(2, "shard");
 
       expect(spyOnGetBooleanInput).toHaveBeenNthCalledWith(1, "coverage");
       expect(spyOnGetBooleanInput).toHaveBeenNthCalledWith(2, "skip-artifact-upload");
       expect(spyOnRunTests).toHaveBeenCalledWith({
+        command: "",
         coverage: true,
         shard: "1/2",
         skipArtifactUpload: false,
@@ -67,7 +68,7 @@ describe("run", () => {
     it("should route commands", () => {
       run();
 
-      expect(spyOnGetInput).toHaveBeenNthCalledWith(1, "command");
+      expect(spyOnGetInput).toHaveBeenNthCalledWith(1, "task");
       expect(spyOnGetInput).toHaveBeenNthCalledWith(2, "github-token");
       expect(spyOnGetInput).toHaveBeenNthCalledWith(3, "shard-count");
 
@@ -101,9 +102,9 @@ describe("run", () => {
     it("should route commands", () => {
       run();
 
-      expect(spyOnGetInput).toHaveBeenCalledWith("command");
-      expect(spyOnSetFailed).toHaveBeenCalledWith("Invalid command: invalid-command");
-      expect(spyOnError).toHaveBeenCalledWith("Invalid command: invalid-command");
+      expect(spyOnGetInput).toHaveBeenCalledWith("task");
+      expect(spyOnSetFailed).toHaveBeenCalledWith("Invalid task: invalid-command");
+      expect(spyOnError).toHaveBeenCalledWith("Invalid task: invalid-command");
     });
   });
 });
