@@ -21,8 +21,7 @@ export const runTests = async ({ coverage, shard, skipArtifactUpload, command }:
         command,
         "--",
         coverage ? "--coverage" : null,
-        shard && `--shard ${shard}`,
-        "--coverageThreshold '{}'"
+        shard && `--shard ${shard}`
       )
     );
 
